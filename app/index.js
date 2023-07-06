@@ -1,23 +1,24 @@
-import { View, Text, SafeAreaView, ScrollView } from "react-native";
+import { SafeAreaView, ScrollView, View } from "react-native";
 import { Stack, useRouter } from "expo-router";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import SwipableList from "./component/SwipableList/SwipableList";
 
 const Home = () => {
   return (
-    <SafeAreaView
-      style={{ flex: 1 }}
-    >
+    <SafeAreaProvider>
       <Stack.Screen
         options={{
-          headerStyle: { backgroundColor: "#fff" },
+          headerStyle: { backgroundColor: "#164B60" },
           headerShadowVisible: false,
           headerTitle: "Today",
-          headerTitleAlign: 'center',
+          headerTitleAlign: "center",
+          headerTitleStyle: { color: "white" },
         }}
       />
-      <ScrollView showsVerticalScrollIndicator={false}>
-
-      </ScrollView>
-    </SafeAreaView>
+      <View>
+        <SwipableList />
+      </View>
+    </SafeAreaProvider>
   );
 };
 
