@@ -17,6 +17,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import Icon from "react-native-vector-icons/FontAwesome";
+import Card from "./Card";
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.9;
@@ -107,7 +108,7 @@ const SwipeableCard = () => {
       </Animated.View>
       <PanGestureHandler onGestureEvent={gestureHandler}>
         <Animated.View style={[styles.card, cardStyle]}>
-          <Text>Card Content</Text>
+          <Card />
         </Animated.View>
       </PanGestureHandler>
       <Animated.View
@@ -141,9 +142,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   card: {
-    backgroundColor: "white",
+    backgroundColor: "#0E292E",
     padding: 16,
-    borderRadius: 8,
+    borderRadius: 20,
     height: 80,
   },
   buttonContainer: {
@@ -164,6 +165,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 8,
     marginHorizontal: 4,
-    height: CARD_WIDTH * 0.5 * 0.25,
+    height: 50,
   },
 });

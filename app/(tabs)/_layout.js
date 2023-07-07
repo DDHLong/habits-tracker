@@ -11,7 +11,10 @@ export default () => {
             <Icon name="home" color={color} size={size} />
           ),
           tabBarLabelStyle: { display: "none" },
-          title: "",
+          tabBarStyle: {
+            backgroundColor: "#0E292E",
+            borderTopWidth: 0,
+          },
         }}
       />
       <Tabs.Screen
@@ -21,7 +24,7 @@ export default () => {
             <Icon name="plus" color={color} size={size} />
           ),
           tabBarLabelStyle: { display: "none" },
-          title: "",
+          tabBarStyle: { backgroundColor: "#0E292E" },
         }}
       />
     </Tabs>
