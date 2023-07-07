@@ -1,11 +1,19 @@
-import { View } from "react-native"
+import { ScrollView, View } from "react-native"
 import SwipeableCard from "./SwipeableCard"
 
 function SwipableList() {
   return (
-    <View>
+    <ScrollView style={{ flex: 1, backgroundColor: "gray"}}>
       <SwipeableCard />
-    </View>
+      <SwipeableCard />
+      <SwipeableCard />
+      <SwipeableCard />
+      <SwipeableCard />
+      <SwipeableCard />
+      <SwipeableCard />
+      <SwipeableCard />
+      <SwipeableCard />
+    </ScrollView>
   )
 }
 
