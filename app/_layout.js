@@ -4,7 +4,9 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 function Layout() {
   return (
     <SafeAreaProvider>
-      <Stack />
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      </Stack>
     </SafeAreaProvider>
   );
 }
