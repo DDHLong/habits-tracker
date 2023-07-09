@@ -102,7 +102,9 @@ const SwipeableCard = () => {
           buttonContainerLeftStyle,
         ]}
       >
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: "#218380" }]}
+        >
           <Icon name="refresh" size={20} color="white" />
         </TouchableOpacity>
       </Animated.View>
@@ -118,13 +120,19 @@ const SwipeableCard = () => {
           buttonContainerStyle,
         ]}
       >
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: "#7c9299" }]}
+        >
           <Icon name="pencil" size={20} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: "#E4542C" }]}
+        >
           <Icon name="trash" size={20} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity
+          style={[styles.button, { backgroundColor: "#32de8a" }]}
+        >
           <Icon name="check" size={20} color="white" />
         </TouchableOpacity>
       </Animated.View>
