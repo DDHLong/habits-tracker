@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { styled } from "nativewind";
-import { withExpoSnack } from "nativewind";
+import { styled, withExpoSnack } from "nativewind";
 
 const StyledView = styled(View);
 const StyledText = styled(Text);
@@ -12,11 +11,11 @@ const Card = () => {
       <View style={styles.iconContainer}>
         <Text>📖</Text>
       </View>
-      <StyledView className="justify-center">
-        <StyledText className="text-white">Reading</StyledText>
-        <StyledText className="text-white">30 pages</StyledText>
-      </StyledView>
-      <StyledView className="ml-auto justify-center">
+      <StyledView className="justify-between flex-row flex-1 items-center">
+        <StyledView>
+          <StyledText className="text-white">Reading</StyledText>
+          <StyledText className="text-white">30 pages</StyledText>
+        </StyledView>
         <StyledText className="text-white">9:30 a.m</StyledText>
       </StyledView>
     </View>

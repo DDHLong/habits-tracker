@@ -7,7 +7,7 @@ const home = () => {
     <>
       <Stack.Screen
         options={{
-          title: "Today",
+          title: "TODAY",
           headerStyle: {
             backgroundColor: "#204B53",
           },
