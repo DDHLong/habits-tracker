@@ -1,9 +1,27 @@
-import { Text, ScrollView } from "react-native";
-import React from "react";
+import { Text, ScrollView, View, TouchableOpacity } from "react-native";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { Stack } from "expo-router";
 import HabitForm from "../../component/Form/HabitForm";
+import EmojiSelector, { Categories } from "react-native-emoji-selector";
+import BottomSheet from "@gorhom/bottom-sheet";
 
 const form = () => {
+  // ref
+  const bottomSheetRef = useRef(null);
+  const [emoji, setEmoji] = useState("");
+  // callbacks
+  const openSheet = () => {
+    bottomSheetRef.current?.expand();
+  };
+
+  const selectEmoji = (emoji) => {
+    setEmoji(emoji);
+    bottomSheetRef.current?.close();
+  };
+
+  // variables
+  const snapPoints = useMemo(() => ["100%"], []);
+
   return (
     <>
       <Stack.Screen
@@ -17,9 +35,22 @@ const form = () => {
           headerShadowVisible: false,
         }}
       />
-      <ScrollView style={{ flex: 1, backgroundColor: "#204B53", padding: 16 }}>
-        <HabitForm />
-      </ScrollView>
+
+      <View style={{ flex: 1 }}>
+        <ScrollView
+          style={{ flex: 1, backgroundColor: "#204B53", padding: 16 }}
+        >
+          <HabitForm openSheet={openSheet} emoji={emoji} />
+        </ScrollView>
+        <BottomSheet
+          ref={bottomSheetRef}
+          index={-1}
+          snapPoints={snapPoints}
+          enablePanDownToClose={true}
+        >
+          <EmojiSelector category={Categories.history} theme="#204B53" onEmojiSelected={(emoji) => selectEmoji(emoji)} />
+        </BottomSheet>
+      </View>
     </>
   );
 };

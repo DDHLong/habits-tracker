@@ -1,41 +1,30 @@
-import { View, Text, TextInput } from "react-native";
-import React from "react";
-import { useController, useForm } from "react-hook-form";
-import { styled, withExpoSnack } from "nativewind";
+import { View, Text, Dimensions } from "react-native";
+import { useForm } from "react-hook-form";
+import { styled } from "nativewind";
+import Input from "./Input";
+import IconPicker from "./IconPicker";
+import Label from "./Label";
+import TimePicker from "./TimePicker";
 
 const StyledView = styled(View);
 const StyledText = styled(Text);
-const StyledTextInput = styled(TextInput);
 
-const HabitForm = () => {
+const HabitForm = ({ openSheet, emoji }) => {
+  const viewWidth = Dimensions.get('window').width;
+  const gapWidth = viewWidth - (viewWidth * 0.96);
   const { control, handleSubmit } = useForm();
+
   return (
     <>
       <Label name={"Name"} />
       <Input name="habit" control={control} />
+      <Label name={"Icon & time"} />
+      <StyledView className="flex flex-row items-center" style={{ gap: gapWidth }}>
+        <IconPicker openSheet={openSheet} emoji={emoji} />
+        <TimePicker />
+      </StyledView>
     </>
   );
 };
 
-export default withExpoSnack(HabitForm);
-
-const Input = ({ name, control }) => {
-  const { field } = useController({
-    control,
-    defaultValue: "",
-    name,
-  });
-
-  return (
-    <StyledTextInput
-      className="h-16 p-4 rounded-2xl text-white text-2xl"
-      style={{ backgroundColor: "#0E292E" }}
-      value={field.value}
-      onChangeText={field.onChange}
-    />
-  );
-};
-
-const Label = ({ name }) => {
-  return <StyledText className="text-white text-lg mb-2">{name}</StyledText>;
-};
+export default HabitForm;
