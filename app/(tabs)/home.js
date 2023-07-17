@@ -1,6 +1,6 @@
 import React from "react";
-import SwipableList from "../../component/SwipableList/SwipableList";
 import { Stack } from "expo-router";
+import SwipableList from "../../component/SwipableList";
 
 const home = () => {
   return (

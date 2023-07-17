@@ -17,7 +17,7 @@ const IconPicker = ({ openSheet, emoji }) => {
           className="p-2 rounded-2xl text-sm w-12 mr-2 h-12 justify-center items-center"
           style={{ backgroundColor: "#218380" }}
         >
-          <StyledText className="text-white text-xl">{emoji ? emoji : "+"}</StyledText>
+          <StyledText className="text-white text-xl font-bold">{emoji ? emoji : "+"}</StyledText>
         </StyledView>
         <StyledText className="text-gray-400 font-medium text-lg">
           Icon

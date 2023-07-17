@@ -1,7 +1,7 @@
 import { Text, ScrollView, View, TouchableOpacity } from "react-native";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { Stack } from "expo-router";
-import HabitForm from "../../component/Form/HabitForm";
+import HabitForm from "../../component/Form";
 import EmojiSelector, { Categories } from "react-native-emoji-selector";
 import BottomSheet from "@gorhom/bottom-sheet";
 
