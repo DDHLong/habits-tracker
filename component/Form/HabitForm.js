@@ -25,8 +25,6 @@ const HabitForm = ({ openSheet, emoji }) => {
       </StyledView>
       <Label name={"Reminder"} />
       <TimePicker />
-      <Label name={"Reminder"} />
-      <Accordion />
     </>
   );
 };
