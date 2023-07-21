@@ -14,7 +14,7 @@ const Input = ({ name, control }) => {
 
   return (
     <StyledTextInput
-      className="h-16 p-4 rounded-2xl text-gray-400 text-lg mb-4 items-center "
+      className="h-16 p-4 rounded-2xl text-gray-400 text-lg items-center "
       style={{ backgroundColor: "#0E292E" }}
       value={field.value}
       onChangeText={field.onChange}
