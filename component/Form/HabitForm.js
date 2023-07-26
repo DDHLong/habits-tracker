@@ -17,7 +17,11 @@ const HabitForm = ({ openSheet, emoji }) => {
   return (
     <>
       <Label name={"Name"} />
-      <Input name="habit" control={control} />
+      <Input
+        name="habit"
+        control={control}
+        placeholder={"Workout, Water, Make bed ..."}
+      />
       <Label name={"Icon & color"} />
       <StyledView
         className="flex flex-row items-center"

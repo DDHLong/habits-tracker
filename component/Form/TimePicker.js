@@ -8,19 +8,26 @@ import Animated, {
   useSharedValue,
   withTiming,
 } from "react-native-reanimated";
+import WheelPicker from "react-native-wheely";
+import { formatTime } from "../../utils/utils";
+
+const hourArray = Array.from({ length: 24 }, (_, index) => index);
+const minuteArray = Array.from({ length: 61 }, (_, index) => index);
 
 const StyledView = styled(View);
 const StyledAnimatedView = styled(Animated.View);
 const StyledText = styled(Text);
 const StyledTouchableWithoutFeedback = styled(TouchableWithoutFeedback);
 
-const TimePicker = () => {
+const TimePicker = React.memo(() => {
   const [isCollapsed, setIsCollapsed] = useState(true);
+  const [hour, setHour] = useState(6);
+  const [minute, setMinute] = useState(30);
   const rotation = useSharedValue(0);
 
   const toggleCollapse = () => {
     setIsCollapsed((prevIsCollapsed) => !prevIsCollapsed);
-    rotation.value = withTiming(isCollapsed ? 0 : 180);
+    rotation.value = withTiming(!isCollapsed ? 0 : 180);
   };
 
   const animatedStyle = useAnimatedStyle(() => {
@@ -38,7 +45,7 @@ const TimePicker = () => {
         >
           <StyledView>
             <StyledText className="text-white text-lg font-bold">
-              6:30
+              {formatTime(hour, minute)}
             </StyledText>
             <StyledText className="text-gray-400 font-medium text-lg">
               Reminder
@@ -51,12 +58,32 @@ const TimePicker = () => {
       </StyledTouchableWithoutFeedback>
       <Collapsible collapsed={isCollapsed}>
         <StyledView
-          className="flex-row h-24 items-center rounded-b-2xl p-4 w-4/5 self-center"
+          className="flex-row h-26 items-center rounded-b-2xl w-4/5 self-center justify-center"
           style={{ backgroundColor: "#0E292E" }}
-        ></StyledView>
+        >
+          <WheelPicker
+            selectedIndex={hour}
+            options={hourArray}
+            onChange={(index) => setHour(index)}
+            containerStyle={{ backgroundColor: "#0E292E" }}
+            selectedIndicatorStyle={{ backgroundColor: "#0E292E" }}
+            itemTextStyle={{ color: "#fff" }}
+            visibleRest={1}
+          />
+          <StyledText className="text-white font-bold">:</StyledText>
+          <WheelPicker
+            selectedIndex={minute}
+            options={minuteArray}
+            onChange={(index) => setMinute(index)}
+            containerStyle={{ backgroundColor: "#0E292E" }}
+            selectedIndicatorStyle={{ backgroundColor: "#0E292E" }}
+            itemTextStyle={{ color: "#fff" }}
+            visibleRest={1}
+          />
+        </StyledView>
       </Collapsible>
     </>
   );
-};
+});
 
 export default TimePicker;
