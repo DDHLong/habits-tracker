@@ -1,23 +1,19 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
-import { styled, withExpoSnack } from "nativewind";
 
-const StyledView = styled(View);
-const StyledText = styled(Text);
-
-const Card = () => {
+const Card = ({ habit }) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.iconContainer}>
-        <Text>📖</Text>
+        <Text>{habit.icon ? habit.icon : "📖"}</Text>
       </View>
-      <StyledView className="justify-between flex-row flex-1 items-center">
-        <StyledView>
-          <StyledText className="text-white">Reading</StyledText>
-          <StyledText className="text-white">30 pages</StyledText>
-        </StyledView>
-        <StyledText className="text-white">9:30 a.m</StyledText>
-      </StyledView>
+      <View className="justify-between flex-row flex-1 items-center">
+        <View>
+          <Text className="text-white">{habit.name}</Text>
+          <Text className="text-white">{`${habit.goal} ${habit.unit}`}</Text>
+        </View>
+        <Text className="text-white">{habit.time_reminder ? habit.time_reminder : "Just do it"}</Text>
+      </View>
     </View>
   );
 };
@@ -38,4 +34,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withExpoSnack(Card);
+export default Card;

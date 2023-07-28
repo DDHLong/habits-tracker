@@ -29,7 +29,7 @@ const timing = {
   easing: Easing.bezier(0.25, 0.1, 0.25, 1),
 };
 
-const SwipeableCard = () => {
+const SwipeableCard = ({ habit }) => {
   const translationX = useSharedValue(0);
 
   const gestureHandler = useAnimatedGestureHandler({
@@ -110,7 +110,7 @@ const SwipeableCard = () => {
       </Animated.View>
       <PanGestureHandler onGestureEvent={gestureHandler}>
         <Animated.View style={[styles.card, cardStyle]}>
-          <Card />
+          <Card habit={habit}/>
         </Animated.View>
       </PanGestureHandler>
       <Animated.View

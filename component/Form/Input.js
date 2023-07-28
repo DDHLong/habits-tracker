@@ -1,9 +1,6 @@
-import { styled } from "nativewind";
 import React from "react";
 import { useController } from "react-hook-form";
 import { TextInput } from "react-native";
-
-const StyledTextInput = styled(TextInput);
 
 const Input = ({ name, control, placeholder }) => {
   const { field } = useController({
@@ -13,7 +10,7 @@ const Input = ({ name, control, placeholder }) => {
   });
 
   return (
-    <StyledTextInput
+    <TextInput
       className="h-16 p-4 rounded-2xl text-gray-400 text-lg items-center placeholder:text-gray-400"
       style={{ backgroundColor: "#0E292E" }}
       value={field.value}
