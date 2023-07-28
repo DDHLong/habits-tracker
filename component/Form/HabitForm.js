@@ -20,7 +20,7 @@ const HabitForm = ({ openSheet, emoji }) => {
       />
       <Label name={"Icon & color"} />
       <View
-        className="flex flex-row items-center"
+        className="flex flex-row items-center mb-4"
         style={{ gap: gapWidth }}
       >
         <IconPicker openSheet={openSheet} emoji={emoji} />

@@ -11,7 +11,7 @@ const Input = ({ name, control, placeholder }) => {
 
   return (
     <TextInput
-      className="h-16 p-4 rounded-2xl text-gray-400 text-lg items-center placeholder:text-gray-400"
+      className="h-16 p-4 rounded-2xl text-gray-400 text-lg items-center placeholder:text-gray-400 mb-4"
       style={{ backgroundColor: "#0E292E" }}
       value={field.value}
       onChangeText={field.onChange}
