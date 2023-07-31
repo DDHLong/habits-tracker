@@ -1,24 +1,9 @@
-import { View, Text, SafeAreaView, ScrollView } from "react-native";
-import { Stack, useRouter } from "expo-router";
+import { Redirect } from "expo-router";
 
-const Home = () => {
+const StartPage = () => {
   return (
-    <SafeAreaView
-      style={{ flex: 1 }}
-    >
-      <Stack.Screen
-        options={{
-          headerStyle: { backgroundColor: "#fff" },
-          headerShadowVisible: false,
-          headerTitle: "Today",
-          headerTitleAlign: 'center',
-        }}
-      />
-      <ScrollView showsVerticalScrollIndicator={false}>
-
-      </ScrollView>
-    </SafeAreaView>
+    <Redirect href="/form" />
   );
 };
 
-export default Home;
+export default StartPage;
