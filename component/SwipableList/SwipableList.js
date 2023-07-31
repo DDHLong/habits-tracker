@@ -3,7 +3,8 @@ import SwipeableCard from "./SwipeableCard";
 import useFetchHabits from "../../hooks/useFetchHabits";
 
 function SwipableList() {
-  const habits = useFetchHabits();
+  const { data: habits, isLoading } = useFetchHabits();
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#204B53" }}>
       {habits.map((habit) => {
