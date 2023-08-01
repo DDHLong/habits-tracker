@@ -1,8 +1,15 @@
 import React from "react";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import SwipableList from "../../component/SwipableList";
+import { Text, TouchableOpacity } from "react-native";
+import { pb } from "../../libs/pocketbase";
 
 const home = () => {
+  const router = useRouter();
+  const logOut = async () => {
+    pb.authStore.clear();
+    router.replace("/signIn");
+  };
   return (
     <>
       <Stack.Screen
@@ -17,6 +24,9 @@ const home = () => {
         }}
       />
       <SwipableList />
+      <TouchableOpacity onPress={logOut}>
+        <Text>Log out</Text>
+      </TouchableOpacity>
     </>
   );
 };

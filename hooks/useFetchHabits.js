@@ -9,8 +9,11 @@ const fetchData = async () => {
 };
 
 function useFetchHabits() {
-  const { isLoading, data } = useQuery(["allHabits"], fetchData);
-  return { data, isLoading };
+  const { isLoading, data, refetch } = useQuery(
+    ["allHabits"],
+    fetchData
+  );
+  return { data, isLoading, refetch };
 }
 
 export default useFetchHabits;
