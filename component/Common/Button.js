@@ -1,13 +1,13 @@
 import React from "react";
-import { Pressable, Text } from "react-native";
+import { ActivityIndicator, Pressable, Text } from "react-native";
 
-const Button = ({ children, ...props }) => {
+const Button = ({ children, isLoading,...props }) => {
   return (
     <Pressable
       {...props}
       className="bg-blue-500 rounded-xl h-12 justify-center items-center mt-4"
     >
-      <Text>{children}</Text>
+      <Text>{isLoading ? <ActivityIndicator /> : children}</Text>
     </Pressable>
   );
 };

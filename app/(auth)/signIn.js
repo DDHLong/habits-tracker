@@ -57,8 +57,8 @@ const signIn = () => {
             placeholder={"Password"}
             isPassword={true}
           />
-          <Button onPress={handleSubmit(onSubmit)} disabled={isLoading}>
-            {isLoading ? <ActivityIndicator /> : "Log in"}
+          <Button onPress={handleSubmit(onSubmit)} disabled={isLoading} isLoading={isLoading}>
+            Log in
           </Button>
         </View>
       </View>
