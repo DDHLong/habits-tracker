@@ -15,7 +15,6 @@ const signIn = () => {
       router.replace("/home");
     }
 
-    console.log(authData);
   };
 
   return (

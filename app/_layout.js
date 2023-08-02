@@ -16,11 +16,11 @@ function Layout() {
 
   useEffect(() => {
     if (!navigationState?.key) return;
-    const inAuthGroup = segments[0] === "auth";
+    const inAuthGroup = segments[0] === "(auth)";
 
     if (!isValid && !inAuthGroup) {
       router.replace("/signIn");
-    } else if (isValid) {
+    } else if (isValid && inAuthGroup) {
       router.replace("/home");
     }
   }, [isValid, segments, navigationState?.key]);
