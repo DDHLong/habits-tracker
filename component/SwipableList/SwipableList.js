@@ -1,4 +1,4 @@
-import { RefreshControl, ScrollView, Text, View } from "react-native";
+import { ActivityIndicator, RefreshControl, ScrollView, Text, View } from "react-native";
 import SwipeableCard from "./SwipeableCard";
 import useFetchHabits from "../../hooks/useFetchHabits";
 import { useRefreshByUser } from "../../hooks/useRefreshByUser";
@@ -10,8 +10,11 @@ function SwipableList() {
 
   if (isLoading)
     return (
-      <View style={{ flex: 1, backgroundColor: "#204B53" }}>
-        <Text>Loading...</Text>
+      <View
+        className="justify-center items-center"
+        style={{ flex: 1, backgroundColor: "#204B53" }}
+      >
+        <ActivityIndicator />
       </View>
     );
 
