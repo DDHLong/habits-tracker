@@ -24,8 +24,6 @@ const signIn = () => {
       setIsLoading(false);
       console.log(error);
     }
-
-    console.log(data);
   };
 
   return (
