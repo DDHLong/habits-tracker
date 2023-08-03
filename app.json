@@ -5,6 +5,18 @@
       "bundler": "metro"
     },
     "name": "habits-tracker",
-    "slug": "habits-tracker"
+    "slug": "habits-tracker",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      }
+    }
   }
 }
