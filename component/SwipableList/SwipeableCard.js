@@ -18,6 +18,8 @@ import Animated, {
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import Card from "./Card";
+import { pb } from "../../libs/pocketbase";
+import useFetchHabits from "../../hooks/useFetchHabits";
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.9;
@@ -30,6 +32,7 @@ const timing = {
 };
 
 const SwipeableCard = ({ habit }) => {
+  const { deleteSingleHabit } = useFetchHabits();
   const translationX = useSharedValue(0);
 
   const gestureHandler = useAnimatedGestureHandler({
@@ -110,7 +113,7 @@ const SwipeableCard = ({ habit }) => {
       </Animated.View>
       <PanGestureHandler onGestureEvent={gestureHandler}>
         <Animated.View style={[styles.card, cardStyle]}>
-          <Card habit={habit}/>
+          <Card habit={habit} />
         </Animated.View>
       </PanGestureHandler>
       <Animated.View
@@ -127,6 +130,7 @@ const SwipeableCard = ({ habit }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, { backgroundColor: "#E4542C" }]}
+          onPress={() => deleteSingleHabit(habit.id)}
         >
           <Icon name="trash" size={20} color="white" />
         </TouchableOpacity>

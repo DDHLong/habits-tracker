@@ -9,10 +9,10 @@ const IconPicker = ({ openSheet, emoji }) => {
       onPress={openSheet}
     >
       <View
-          className="p-2 rounded-2xl text-sm w-12 mr-2 h-12 justify-center items-center"
+          className="p-2 rounded-full text-sm w-12 mr-2 h-12 justify-center items-center"
           style={{ backgroundColor: "#218380" }}
         >
-          <Text className="text-white text-xl font-bold">{emoji ? emoji : "+"}</Text>
+          <Text className="text-white text-2xl font-bold">{emoji ? emoji : "+"}</Text>
         </View>
         <Text className="text-gray-400 font-medium text-lg">
           Icon

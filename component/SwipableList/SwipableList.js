@@ -1,4 +1,10 @@
-import { ActivityIndicator, RefreshControl, ScrollView, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  RefreshControl,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import SwipeableCard from "./SwipeableCard";
 import useFetchHabits from "../../hooks/useFetchHabits";
 import { useRefreshByUser } from "../../hooks/useRefreshByUser";
