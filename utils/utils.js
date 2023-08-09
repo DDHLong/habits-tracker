@@ -1,3 +1,7 @@
+
+import { clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+
 export function cb(arr) {
   const combinedObject = {};
 
@@ -30,4 +34,8 @@ export function formatTime(hour, minute) {
 
   // Return the formatted time
   return `${hour}:${minute}`;
+}
+
+export function cn(...inputs) {
+  return twMerge(clsx(inputs));
 }

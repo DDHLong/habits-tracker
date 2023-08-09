@@ -1,15 +1,12 @@
 import React from "react";
 import { Stack, useRouter } from "expo-router";
 import SwipableList from "../../component/SwipableList";
-import { Text, TouchableOpacity } from "react-native";
-import { pb } from "../../libs/pocketbase";
+import Button from "../../component/Common/Button";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const home = () => {
   const router = useRouter();
-  const logOut = async () => {
-    pb.authStore.clear();
-    router.replace("/signIn");
-  };
+
   return (
     <>
       <Stack.Screen
@@ -21,12 +18,18 @@ const home = () => {
           headerTintColor: "#fff",
           headerTitleAlign: "center",
           headerShadowVisible: false,
+          headerLeft: () => (
+            <Button
+              className="bg-transparent w-4 mt-0 px-4"
+              onPress={() => router.push("/profile")}
+            >
+              <Icon name="user" size={20} color="#fff" />
+            </Button>
+          ),
         }}
       />
       <SwipableList />
-      <TouchableOpacity onPress={logOut}>
-        <Text>Log out</Text>
-      </TouchableOpacity>
+      
     </>
   );
 };
