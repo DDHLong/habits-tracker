@@ -20,6 +20,8 @@ import Icon from "react-native-vector-icons/FontAwesome";
 import Card from "./Card";
 import { pb } from "../../libs/pocketbase";
 import useFetchHabits from "../../hooks/useFetchHabits";
+import useHabitLogs from "../../hooks/useHabitLogs";
+import { getTodayDate } from "../../utils/utils";
 
 const { width } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.9;
@@ -31,9 +33,24 @@ const timing = {
   easing: Easing.bezier(0.25, 0.1, 0.25, 1),
 };
 
-const SwipeableCard = ({ habit }) => {
+const SwipeableCard = ({ habit, done }) => {
   const { deleteSingleHabit } = useFetchHabits();
+  const { maskAsDone } = useHabitLogs();
   const translationX = useSharedValue(0);
+
+  const check = () => {
+    if (!done) {
+      const data = {
+        author: pb.authStore.model.id,
+        habit: habit.id,
+        is_done: true,
+        log_date: getTodayDate(),
+      };
+
+      maskAsDone(data);
+    }
+    translationX.value = withTiming(0, timing);
+  };
 
   const gestureHandler = useAnimatedGestureHandler({
     onStart: (_, ctx) => {
@@ -96,6 +113,8 @@ const SwipeableCard = ({ habit }) => {
     };
   });
 
+  const habitBackgroundColor = done ? "#32de8a" : "#0E292E";
+
   return (
     <View style={styles.container}>
       <Animated.View
@@ -112,7 +131,13 @@ const SwipeableCard = ({ habit }) => {
         </TouchableOpacity>
       </Animated.View>
       <PanGestureHandler onGestureEvent={gestureHandler}>
-        <Animated.View style={[styles.card, cardStyle]}>
+        <Animated.View
+          style={[
+            styles.card,
+            cardStyle,
+            { backgroundColor: habitBackgroundColor },
+          ]}
+        >
           <Card habit={habit} />
         </Animated.View>
       </PanGestureHandler>
@@ -136,6 +161,7 @@ const SwipeableCard = ({ habit }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={[styles.button, { backgroundColor: "#32de8a" }]}
+          onPress={() => check()}
         >
           <Icon name="check" size={20} color="white" />
         </TouchableOpacity>
@@ -154,7 +180,6 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   card: {
-    backgroundColor: "#0E292E",
     padding: 16,
     borderRadius: 20,
     height: 80,

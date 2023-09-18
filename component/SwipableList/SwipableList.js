@@ -8,9 +8,12 @@ import {
 import SwipeableCard from "./SwipeableCard";
 import useFetchHabits from "../../hooks/useFetchHabits";
 import { useRefreshByUser } from "../../hooks/useRefreshByUser";
+import useHabitLogs from "../../hooks/useHabitLogs";
 
 function SwipableList() {
   const { data: habits, isLoading, refetch } = useFetchHabits();
+
+  const { data: habitLogs, refetch: logsRefetch } = useHabitLogs();
 
   const { isRefetchingByUser, refetchByUser } = useRefreshByUser(refetch);
 
@@ -35,7 +38,13 @@ function SwipableList() {
       }
     >
       {habits.map((habit) => {
-        return <SwipeableCard key={habit.id} habit={habit} />;
+        return (
+          <SwipeableCard
+            key={habit.id}
+            habit={habit}
+            done={habitLogs.some((h) => h.habit === habit.id)}
+          />
+        );
       })}
     </ScrollView>
   );
