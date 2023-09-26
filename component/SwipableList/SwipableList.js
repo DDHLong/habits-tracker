@@ -43,6 +43,7 @@ function SwipableList() {
             key={habit.id}
             habit={habit}
             done={habitLogs.some((h) => h.habit === habit.id)}
+            habitLog={habitLogs.find((h) => h.habit === habit.id)}
           />
         );
       })}

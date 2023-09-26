@@ -18,6 +18,10 @@ const createHabitLog = async (habitLog) => {
   await pb.collection("habit_logs").create(habitLog);
 };
 
+const deleteHabitLog = async (habitLogId) => {
+  await pb.collection("habit_logs").delete(habitLogId);
+};
+
 function useHabitLogs() {
   const queryClient = useQueryClient();
 
@@ -29,11 +33,21 @@ function useHabitLogs() {
     },
   });
 
+  const mutationDelete = useMutation(deleteHabitLog, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("habitLogs");
+    },
+  });
+
   const maskAsDone = async (newHabit) => {
     await mutationCreate.mutateAsync(newHabit);
   };
 
-  return { data, isLoading, refetch, maskAsDone };
+  const resetLog = async (habit) => {
+    await mutationDelete.mutateAsync(habit);
+  };
+
+  return { data, isLoading, refetch, maskAsDone, resetLog };
 }
 
 export default useHabitLogs;

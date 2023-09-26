@@ -33,9 +33,9 @@ const timing = {
   easing: Easing.bezier(0.25, 0.1, 0.25, 1),
 };
 
-const SwipeableCard = ({ habit, done }) => {
+const SwipeableCard = ({ habit, done, habitLog }) => {
   const { deleteSingleHabit } = useFetchHabits();
-  const { maskAsDone } = useHabitLogs();
+  const { maskAsDone, resetLog } = useHabitLogs();
   const translationX = useSharedValue(0);
 
   const check = () => {
@@ -48,6 +48,13 @@ const SwipeableCard = ({ habit, done }) => {
       };
 
       maskAsDone(data);
+    }
+    translationX.value = withTiming(0, timing);
+  };
+
+  const reset = () => {
+    if (habitLog) {
+      resetLog(habitLog.id);
     }
     translationX.value = withTiming(0, timing);
   };
@@ -126,6 +133,7 @@ const SwipeableCard = ({ habit, done }) => {
       >
         <TouchableOpacity
           style={[styles.button, { backgroundColor: "#218380" }]}
+          onPress={() => reset()}
         >
           <Icon name="refresh" size={20} color="white" />
         </TouchableOpacity>
