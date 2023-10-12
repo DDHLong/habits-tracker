@@ -43,7 +43,7 @@ function useHabitLogs() {
       //Return a context object with the snapshotted value
       return { prevData };
     },
-    onError: (_, __, context) => {
+    onError: (_, __, context) => { 
       //if error roll back to previous state
       queryClient.setQueryData(['habitLogs'], () => context?.prevData)
     },
@@ -52,9 +52,9 @@ function useHabitLogs() {
       queryClient.invalidateQueries("habitLogs");
     },
   });
-
+  
   const {mutate: resetLog} = useMutation(deleteHabitLog, {
-    onMutate: async (habitLogId) => {
+    onMutate: async (habitLogId) => { 
       await queryClient.cancelQueries(["habitLogs"]);
 
       const prevData = queryClient.getQueryData(["habitLogs"]);
@@ -63,7 +63,7 @@ function useHabitLogs() {
 
       queryClient.setQueryData(["habitLogs"], tempData);
 
-      return { prevData };
+      return { prevData }; 
     },
     onError: (_, __, context) => {
       queryClient.setQueryData(['habitLogs'], () => context?.prevData)
