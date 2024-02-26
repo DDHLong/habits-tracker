@@ -1,9 +1,7 @@
 import {
   View,
-  Text,
   Dimensions,
   ScrollView,
-  TouchableOpacity,
 } from "react-native";
 import { useForm } from "react-hook-form";
 import Input from "./Input";
@@ -11,13 +9,12 @@ import IconPicker from "./IconPicker";
 import Label from "./Label";
 import TimePicker from "./TimePicker";
 import { useRouter } from "expo-router";
-import { useMemo, useRef, useState } from "react";
-import EmojiSelector, { Categories } from "react-native-emoji-selector";
-import BottomSheet from "@gorhom/bottom-sheet";
+import { useMemo, useState } from "react";
 import FloatingButton from "../../component/Common/FloatingButton";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { pb } from "../../libs/pocketbase";
 import useFetchHabits from "../../hooks/useFetchHabits";
+import EmojiPicker from "rn-emoji-keyboard";
 
 const HabitForm = () => {
   const viewWidth = Dimensions.get("window").width;
@@ -27,7 +24,8 @@ const HabitForm = () => {
   const { control, handleSubmit, reset } = useForm();
   const router = useRouter();
   // ref
-  const bottomSheetRef = useRef(null);
+  // const bottomSheetRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
   const [emoji, setEmoji] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -56,16 +54,13 @@ const HabitForm = () => {
   };
 
   const openSheet = () => {
-    bottomSheetRef.current?.expand();
+    setIsOpen(true);
   };
 
-  const selectEmoji = (emoji) => {
-    setEmoji(emoji);
-    bottomSheetRef.current?.close();
+  const selectEmoji = (emojiObject) => {
+    setEmoji(emojiObject.emoji);
+    console.log(emoji);
   };
-
-  // variables
-  const snapPoints = useMemo(() => ["100%"], []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -104,18 +99,25 @@ const HabitForm = () => {
       <FloatingButton onPress={handleSubmit(onSubmit)} isLoading={isLoading}>
         <Icon name="plus" size={30} color="#fff" />
       </FloatingButton>
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={-1}
-        snapPoints={snapPoints}
-        enablePanDownToClose={true}
-      >
-        <EmojiSelector
-          category={Categories.history}
-          theme="#204B53"
-          onEmojiSelected={(emoji) => selectEmoji(emoji)}
-        />
-      </BottomSheet>
+      <EmojiPicker
+        defaultHeight="60%"
+        onEmojiSelected={selectEmoji}
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        theme={{
+          backdrop: '#16161888',
+          knob: '#204B53',
+          container: '#282829',
+          header: '#fff',
+          skinTonesContainer: '#252427',
+          category: {
+            icon: '#766dfc',
+            iconActive: '#fff',
+            container: '#252427',
+            containerActive: '#766dfc',
+          },
+        }}
+      />
     </View>
   );
 };

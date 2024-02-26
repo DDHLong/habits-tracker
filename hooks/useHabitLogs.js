@@ -29,26 +29,32 @@ function useHabitLogs() {
 
   const {mutate: maskAsDone} = useMutation(createHabitLog,{
     onMutate: async (habitLog) => {
+      //cancel all on-going queries or else optimistic update can be overwritten
       await queryClient.cancelQueries(["habitLogs"]);
 
+      //Snapshot the previous value
       const prevData = queryClient.getQueryData(["habitLogs"]);
 
+      //Optimistically update to the new value
       const tempData = [...prevData, habitLog]
 
       queryClient.setQueryData(["habitLogs"], tempData);
 
+      //Return a context object with the snapshotted value
       return { prevData };
     },
-    onError: (_, __, context) => {
+    onError: (_, __, context) => { 
+      //if error roll back to previous state
       queryClient.setQueryData(['habitLogs'], () => context?.prevData)
     },
     onSettled: () => {
+      //refresh the data to the latest record
       queryClient.invalidateQueries("habitLogs");
     },
   });
-
+  
   const {mutate: resetLog} = useMutation(deleteHabitLog, {
-    onMutate: async (habitLogId) => {
+    onMutate: async (habitLogId) => { 
       await queryClient.cancelQueries(["habitLogs"]);
 
       const prevData = queryClient.getQueryData(["habitLogs"]);
@@ -57,7 +63,7 @@ function useHabitLogs() {
 
       queryClient.setQueryData(["habitLogs"], tempData);
 
-      return { prevData };
+      return { prevData }; 
     },
     onError: (_, __, context) => {
       queryClient.setQueryData(['habitLogs'], () => context?.prevData)
